@@ -1,32 +1,20 @@
-const { Menu, app, BrowserWindow } = require('electron')
+const {Menu, app, BrowserWindow} = require('electron')
 
 const menu = require('./menu')
 
-function createWindow () {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
+function createWindow(){
 
-  win.loadFile('index.html')
-  //win.webContents.openDevTools()
+    let win = new BrowserWindow({
+        width: 800,
+        height:600,
+        webPreferences:{
+            nodeIntegration: true
+        }
+    })
+
+    win.loadFile("index.html")
 }
 
 app.whenReady().then(createWindow)
 
-app.whenReady().then(createWindow)
-
-// app.on('window-all-closed', () => {
-//   if (process.platform !== 'darwin') {
-//     app.quit()
-//   }
-// })
-
-// app.on('activate', () => {
-//   if (BrowserWindow.getAllWindows().length === 0) {
-//     createWindow()
-// }
-// })
+Menu.setApplicationMenu(menu)
