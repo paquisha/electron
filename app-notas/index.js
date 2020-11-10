@@ -1,4 +1,6 @@
-const { app, BrowserWindow } = require('electron')
+const { Menu, app, BrowserWindow } = require('electron')
+
+const menu = require('./menu')
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -10,19 +12,21 @@ function createWindow () {
   })
 
   win.loadFile('index.html')
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 }
 
 app.whenReady().then(createWindow)
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+app.whenReady().then(createWindow)
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-}
-})
+// app.on('window-all-closed', () => {
+//   if (process.platform !== 'darwin') {
+//     app.quit()
+//   }
+// })
+
+// app.on('activate', () => {
+//   if (BrowserWindow.getAllWindows().length === 0) {
+//     createWindow()
+// }
+// })

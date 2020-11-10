@@ -26,5 +26,14 @@
     <script>
         var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
     </script>
+    <script>
+        const { ipcRender } = require('electron')
+
+        ipcRender.send('editor-channel', 'Pagina cargada')
+        
+        ipcRender.on('editor-channel', (event, arg) =>{
+            console.log('mensaje recibido desde el proceso principal '+arg);
+        })
+    </script>
 </body>
 </html>
