@@ -15,3 +15,9 @@ function createWindow(){
 }
 
 app.whenReady().then(createWindow)
+
+app.on('ready',()=>{
+    ipcMain.on('item-send',(event, data)=>{
+        mydb.item_all()
+    })
+})
