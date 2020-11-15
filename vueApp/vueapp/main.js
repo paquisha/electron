@@ -1,24 +1,27 @@
+const { app, BrowserWindow, ipcMain } = require('electron')
+const mydb = require("./database")
 
-const {app, BrowserWindow} = require('electron')
-
-function createWindow(){
-
-    let win = new BrowserWindow({
-        width: 800,
-        height:600,
-        webPreferences:{
-            nodeIntegration: true
+function createWindow() {
+    let win = new BrowserWindow(
+        {
+            width: 800,
+            height: 600,
+            webPreferences: {
+                nodeIntegration: true
+            }
         }
-    })
+    )
 
-    //win.loadURL("file://"+__dirname+"/dist/index.html")
-    if(process.env.DEBUG){
-        win.loadURL('http://localhost:8080/');        
-    }
-    else{
-        win.loadURL("file://"+__dirname+"/dist/index.html");
-    }
+    //win.loadFile("index.html")
+    // 
+    if (process.env.DEBUG == 'true')
+        win.loadURL('http://localhost:8080/');
+    else
+        win.loadURL('file://' + __dirname + '/dist/index.html');
 
+    win.webContents.openDevTools()
+    //console.log(__dirname)
+    mydb.create_db()
 }
 
 app.whenReady().then(createWindow)
